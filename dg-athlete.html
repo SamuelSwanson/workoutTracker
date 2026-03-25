@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DG ATHLETE — 32-Week Training System</title>
+<link rel="stylesheet" href="css/base.css"/>
+<style>
+  /* DG theme — lime green (default, no overrides needed) */
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <a class="back-link" href="index.html">← HOME</a>
+    <div class="logo">DG ATHLETE<span>32-WEEK TRAINING SYSTEM v2</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="dot"></span><span id="weeksDone">0</span>&nbsp;/ 32 WEEKS</div>
+    <div class="stat-pill"><span class="dot r"></span><span id="daysDone">0</span>&nbsp;DAYS LOGGED</div>
+  </div>
+</header>
+<div class="phase-nav">
+  <div class="phase-tab active" onclick="setPhase(0)">PHASE 1 — WKS 1–16</div>
+  <div class="phase-tab" onclick="setPhase(1)">PHASE 2 — WKS 17–32</div>
+</div>
+<div class="week-grid-wrap">
+  <div class="section-label">SELECT WEEK — dashed border = deload week</div>
+  <div class="week-grid" id="weekGrid"></div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--cardio)"></div>CARDIO</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yoga)"></div>YOGA/STRETCH</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--dg)"></div>DISC GOLF</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--lift)"></div>LIFTING</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>DELOAD</div>
+</div>
+<div class="content-area" id="contentArea"></div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="infoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-ex-name" id="modalName"></div>
+    <div class="modal-ex-sets" id="modalSets"></div>
+    <a class="modal-yt-link" id="modalYT" target="_blank" rel="noopener">▶ SEARCH YOUTUBE — HOW TO DO THIS</a>
+  </div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/dg-days.js"></script>
+<script src="js/app.js"></script>
+<script>
+  init({
+    storageKey: 'dgAthlete_v2',
+    exportFilename: 'dg_athlete_progress.json',
+  });
+</script>
+</body>
+</html>
