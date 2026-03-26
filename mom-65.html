@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MOM FIT — 32-Week Training System</title>
+<link rel="stylesheet" href="css/base.css"/>
+<style>
+  :root { --accent:#7af77c; --accent2:#4a8f67; --accent3:#69d8a5; --accent4:#6dc7ff; }
+  .day-tag { font-size:.58rem; letter-spacing:.01em; }
+  .quality-summary{font-family:'DM Mono',monospace;font-size:.72rem;opacity:.75;margin-top:-8px;margin-bottom:6px;}
+  .weekly-progress-bar{width:100%;height:8px;background:var(--surface2);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:12px}
+  .weekly-progress-fill{height:100%;transition:width .3s ease, background .3s ease;}
+  .quality-select{text-align:right;display:flex;gap:4px;font-family:'DM Mono',monospace;}
+  .quality-btn{border:1px solid var(--border);border-radius:6px;background:rgba(255,255,255,.05);color:var(--muted);font-size:.6rem;padding:3px 6px;cursor:pointer;transition:.2s}
+  .quality-btn.active{background:var(--accent);color:#000;border-color:var(--accent);}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <a class="back-link" href="index.html">← HOME</a>
+    <div class="logo">MOM FIT<span>32-WEEK TRAINING SYSTEM v1</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="dot"></span><span id="weeksDone">0</span>&nbsp;/ 32 WEEKS</div>
+    <div class="stat-pill"><span class="dot r"></span><span id="daysDone">0</span>&nbsp;DAYS LOGGED</div>
+  </div>
+</header>
+<div class="phase-nav">
+  <div class="phase-tab active" onclick="setPhase(0)">PHASE 1 — WKS 1–16</div>
+  <div class="phase-tab" onclick="setPhase(1)">PHASE 2 — WKS 17–32</div>
+</div>
+<div class="week-grid-wrap">
+  <div class="section-label">SELECT WEEK — light recoveries in weeks 4/8/12/16/20/24/28/32</div>
+  <div class="week-grid" id="weekGrid"></div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--cardio)"></div>AEROBIC</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yoga)"></div>MOBILITY</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--dg)"></div>CORE</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--lift)"></div>STRENGTH</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>RECOVER</div>
+</div>
+<div class="content-area" id="contentArea"></div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="infoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-ex-name" id="modalName"></div>
+    <div class="modal-ex-sets" id="modalSets"></div>
+    <a class="modal-yt-link" id="modalYT" target="_blank" rel="noopener">▶ SEARCH YOUTUBE — HOW TO DO THIS</a>
+  </div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/mom-days.js"></script>
+<script src="js/app.js"></script>
+<script>
+  init({
+    storageKey: 'momFit65_v1',
+    exportFilename: 'mom_fit65_progress.json',
+  });
+</script>
+</body>
+</html>

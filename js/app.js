@@ -49,12 +49,21 @@ function renderWeek(){
   _exInfo={};
   const w=currentWeek, bl=getBlockLabel(w), days=buildDays(w);
   const state=getState(), wData=state[`week_${w}`]||{}, pn=weekProgNote(w);
+  const totalWorkoutDays=Object.keys(days).filter(k=>!days[k].isRest).length;
+  const daysLogged=Object.keys(wData).filter(k=>k.startsWith('day_done_')&&wData[k]===true).length;
+  let weeklyQuality='Low';
+  if(daysLogged>=5) weeklyQuality='Perfect';
+  else if(daysLogged>=3) weeklyQuality='Good';
+  const progressPercent = Math.round(daysLogged/totalWorkoutDays*100);
+  const progressColor = weeklyQuality==='Perfect' ? 'var(--accent2)' : weeklyQuality==='Good' ? 'var(--accent)' : 'var(--yellow)';
   const content=document.getElementById('contentArea');
   content.innerHTML=`
     <div class="week-header">
       <div class="week-title">WEEK <span>${w}</span></div>
       <div class="week-meta"><div class="block-badge ${bl.cls}">${bl.label}</div><div class="week-focus">${bl.sub}</div></div>
     </div>
+    <div class="quality-summary">Weekly Quality: <strong>${weeklyQuality}</strong> (${daysLogged}/${totalWorkoutDays} workouts complete)</div>
+    <div class="weekly-progress-bar" aria-label="Weekly progress bar"><div class="weekly-progress-fill" style="width:${progressPercent}%;background:${progressColor}"></div></div>
     <div class="prog-banner ${bl.isDeload?'deload-banner':''}"><strong>${pn.title}</strong>${pn.body}</div>
     <div class="days-grid" id="daysGrid"></div>
     <div class="notes-area">
@@ -106,7 +115,8 @@ function toggleDay(week,dayKey,btn){
   s[wk][key]=!wasDone; saveState(s);
   btn.classList.toggle('done',!wasDone);
   btn.textContent=!wasDone?'✓ DAY COMPLETE':'MARK DAY COMPLETE';
-  showToast(!wasDone?'🏆 Day logged!':'Day unmarked'); renderGrid();
+  showToast(!wasDone?'🏆 Day logged!':'Day unmarked');
+  renderGrid(); renderWeek();
 }
 function setPhase(p){
   currentPhase=p; currentWeek=p===0?1:17;
