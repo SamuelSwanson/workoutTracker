@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FOOTBALL / HOOPS ATHLETE — 32-Week Bulk Program</title>
+<link rel="stylesheet" href="css/base.css"/>
+<style>
+  /* Football/Hoops theme — gold/amber */
+  :root {
+    --accent:#f7b830;
+    --accent2:#f7d870;
+    --accent3:#f77830;
+    --accent4:#f730a8;
+    --dg:#f7b830;
+    --accent-lo:rgba(247,184,48,.08);
+    --accent-bd:rgba(247,184,48,.28);
+  }
+  .stat-pill .dot { background: var(--accent); }
+  .stat-pill .dot.r { background: var(--accent3); }
+  .block-badge { color: #000; }
+  .block-badge.deload { color: #000; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <a class="back-link" href="index.html">← HOME</a>
+    <div class="logo">FOOTBALL / HOOPS<span>32-WEEK BULK PROGRAM</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="dot"></span><span id="weeksDone">0</span>&nbsp;/ 32 WEEKS</div>
+    <div class="stat-pill"><span class="dot r"></span><span id="daysDone">0</span>&nbsp;DAYS LOGGED</div>
+  </div>
+</header>
+<div class="phase-nav">
+  <div class="phase-tab active" onclick="setPhase(0)">PHASE 1 — WKS 1–16</div>
+  <div class="phase-tab" onclick="setPhase(1)">PHASE 2 — WKS 17–32</div>
+</div>
+<div class="week-grid-wrap">
+  <div class="section-label">SELECT WEEK — dashed border = deload week</div>
+  <div class="week-grid" id="weekGrid"></div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--cardio)"></div>CARDIO</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yoga)"></div>MOBILITY</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--dg)"></div>FOOTBALL / HOOPS</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--lift)"></div>LIFTING</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>DELOAD</div>
+</div>
+<div class="content-area" id="contentArea"></div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="infoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-ex-name" id="modalName"></div>
+    <div class="modal-ex-sets" id="modalSets"></div>
+    <a class="modal-yt-link" id="modalYT" target="_blank" rel="noopener">▶ SEARCH YOUTUBE — HOW TO DO THIS</a>
+  </div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/football-days.js"></script>
+<script src="js/app.js"></script>
+<script>
+  init({
+    storageKey: 'footballAthlete_v1',
+    exportFilename: 'football_athlete_progress.json',
+  });
+</script>
+</body>
+</html>
