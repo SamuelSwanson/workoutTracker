@@ -72,33 +72,21 @@ function buildDays(w){
       }
     },
     wednesday:{
-      name:'WEDNESDAY', tag:'Recovery + Mobility', tagClass:'tag-recovery',
+      name:'WEDNESDAY', tag:'League Night', tagClass:'tag-recovery',
       segments:{
-        cardio:{label:'CARDIO',color:'cardio',items:[
-          {name:'Peloton — Easy Recovery Ride', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
+        yoga:{label:'PRE-LEAGUE WARM-UP — ~25 min',color:'yoga',items:[
+          {name:'Dynamic Hip Circles + Arm Swings', sets:'5 min — get the body moving'},
+          {name:'Hip Flexor & Piriformis Release — Yoga Mat', sets:'6 min'},
+          {name:'Thoracic Rotation + Windmill Stretch', sets:'5 min'},
+          {name:'Shoulder Capsule + Sleeper Stretch', sets:'4 min per side'},
+          {name:'Wrist & Forearm Opener', sets:'3 min'},
+          {name:'Balance Board — Brief Activation', sets:'3 min — eyes open, single leg'},
         ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
-          {name:'Full Body Yoga Flow — Yoga Mat', sets:'20 min'},
-          {name:'Yoga Ball — Thoracic Extension Hold', sets:'3×45s'},
-          {name:'Balance Board — Eyes Closed Holds', sets:bw>=2?'6 min':'5 min'},
-          {name:'Ankle Mobility Circles — Small Loop Bands', sets:'2×15 circles per foot'},
+        dg:{label:'DISC GOLF — LEAGUE PLAY',color:'dg',items:[
+          {name:'Warm-up Putts — C1 & C2 circles', sets:'10 min before tee time'},
+          {name:'League Round — Compete', sets:'Play your best — this is game night'},
+          {name:'Post-round: Wrist & Forearm Shake-out', sets:'3 min cooldown'},
         ]},
-        dg:{label:'DISC GOLF — PUTTING',color:'dg',items:[
-          {name:'Putting Only — Basket Circle 1 & 2', sets:'15 min focused'},
-          {name:'TechDisc Grip & Release Feedback', sets:'10 min'},
-        ]},
-        lift:{label:'LIGHT LIFT — Recovery Focus',color:'lift',items:[
-          {name:'Goblet Squat — Kettlebell', sets:dl?'2×12 light':'3×12'},
-          {name:'Leg Extension Machine — Recovery Weight', sets:dl?'2×15 very light':'3×15 blood flow'},
-          {name:'Hamstring Curl Machine — Recovery Weight', sets:dl?'2×15 very light':'3×15 blood flow'},
-          {name:'Ring Push-ups — Olympic Rings', sets:dl?'2×10':'3×12'},
-          {name:'Back Extensions — Adjustable Bench', sets:dl?'2×12':'3×15'},
-          {name:'Band Pull-Aparts — Large Loop Band', sets:'3×20'},
-          {name:'Mace 360 — Mace Bell warm weight', sets:'3×12 per direction'},
-          {name:'Kettlebell Swings', sets:dl?'2×15':'3×15'},
-          {name:'Yoga Ball — Dead Bug Core Hold', sets:'3×30s'},
-          {name:'Resistance Band — Face Pulls large loop', sets:'3×20'},
-        ]}
       }
     },
     thursday:{
@@ -199,13 +187,29 @@ function buildDays(w){
       }
     },
     sunday:{
-      name:'SUNDAY', tag:'Rest', tagClass:'tag-rest', isRest:true,
+      name:'SUNDAY', tag:'Recovery + Light Lift', tagClass:'tag-recovery',
       segments:{
-        yoga:{label:'ACTIVE RECOVERY — Optional',color:'yoga',items:[
-          {name:'Walk or light hike — outdoors', sets:'30+ min'},
-          {name:'Foam roll + full body Yoga Mat session', sets:'15 min'},
-          {name:'Balance Board — casual no pressure', sets:'5 min optional'},
-          {name:'Mental game visualization — plan the round', sets:'10 min'},
+        cardio:{label:'CARDIO',color:'cardio',items:[
+          {name:'Peloton — Easy Recovery Ride', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
+        ]},
+        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+          {name:'Full Body Yoga Flow — Yoga Mat', sets:'20 min'},
+          {name:'Yoga Ball — Thoracic Extension Hold', sets:'3×45s'},
+          {name:'Balance Board — Eyes Closed Holds', sets:bw>=2?'6 min':'5 min'},
+          {name:'Ankle Mobility Circles — Small Loop Bands', sets:'2×15 circles per foot'},
+        ]},
+        lift:{label:'LIGHT LIFT — Recovery Focus',color:'lift',items:[
+          {name:'Goblet Squat — Kettlebell', sets:dl?'2×12 light':'3×12'},
+          {name:'Leg Extension Machine — Recovery Weight', sets:dl?'2×15 very light':'3×15 blood flow'},
+          {name:'Hamstring Curl Machine — Recovery Weight', sets:dl?'2×15 very light':'3×15 blood flow'},
+          {name:'Ring Push-ups — Olympic Rings', sets:dl?'2×10':'3×12'},
+          {name:'Back Extensions — Adjustable Bench', sets:dl?'2×12':'3×15'},
+          {name:'Band Pull-Aparts — Large Loop Band', sets:'3×20'},
+          {name:'Mace 360 — Mace Bell warm weight', sets:'3×12 per direction'},
+          {name:'Kettlebell Swings', sets:dl?'2×15':'3×15'},
+          {name:'Yoga Ball — Dead Bug Core Hold', sets:'3×30s'},
+          {name:'Resistance Band — Face Pulls large loop', sets:'3×20'},
+          {name:'Mental Game — Visualization', sets:'10 min — plan the round, rehearse shots'},
         ]}
       }
     }

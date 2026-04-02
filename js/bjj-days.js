@@ -1,6 +1,10 @@
 // ================================================================
 //  BJJ / JIU-JITSU ATHLETE — buildDays() + weekProgNote()
-//  Standard gym equipment only. 1–2 hrs/day.
+//  Schedule: BJJ Mon/Tue/Wed · Strength Lift Thu/Fri · Rest Sat/Sun
+//  Equipment: bench, squat rack, kettlebells, standard gym machines
+//  (lat pulldown, rows, fly, triceps, leg curl, glute/ham),
+//  dip bar, cardio bike, rower, treadmill
+//  Lift focus: STRENGTH (3–5 rep ranges) — BJJ is the endurance
 //  Requires engine.js loaded first.
 // ================================================================
 
@@ -10,193 +14,120 @@ function buildDays(w){
 
   return {
     monday:{
-      name:'MONDAY', tag:'Strength + Conditioning', tagClass:'tag-lower',
+      name:'MONDAY', tag:'BJJ Training', tagClass:'tag-lower',
       segments:{
-        cardio:{label:'CARDIO / CONDITIONING',color:'cardio',items:[
-          {name:'Rowing Machine — Steady Power Pull', sets:CT(20,bw,blk,p2,dl)},
-          {name:'Jump Rope — Mixed Tempo', sets:'3 min'},
+        yoga:{label:'PRE-CLASS WARM-UP — ~15 min',color:'yoga',items:[
+          {name:'Hip Flexor & Groin Flow — Mat', sets:'5 min'},
+          {name:'Butterfly Stretch + Pigeon Pose', sets:'4 min'},
+          {name:'Neck Mobility — Circles + Side Tilt', sets:'3 min'},
+          {name:'Wrist + Forearm Opener', sets:'3 min'},
         ]},
-        yoga:{label:'MOBILITY / STRETCH',color:'yoga',items:[
-          {name:'Hip Flexor & Groin Flow — Mat', sets:'8 min'},
-          {name:'Butterfly Stretch + Pigeon Pose', sets:'6 min'},
-          {name:'Ankle Mobility Work', sets:'3 min'},
+        dg:{label:'BJJ — GROUND WORK + ROLLING',color:'dg',items:[
+          {name:'Hip Escapes (Shrimping) — warm-up drill', sets:'3×10 per side, controlled'},
+          {name:'Bridge + Roll Drill', sets:P(3,8,'explosive',bw,blk,p2,dl)},
+          {name:'Guard Retention / Escapes — class drilling', sets:'~20 min technique'},
+          {name:'Live Rolling', sets:dl?'1–2 rounds technical only':isD?'4–5 rounds × 5 min':isC?'3–4 rounds × 5 min':'3 rounds × 5 min'},
+          {name:'Post-Roll: Hip + Shoulder Stretch — Mat', sets:'5 min cooldown'},
         ]},
-        dg:{label:'BJJ — DRILLING + LIVE ROLLING',color:'dg',items:[
-          {name:'Hip Escapes (Shrimping) — Mat', sets:'4×10 per side'},
-          {name:'Bridge + Roll Drill — Mat', sets:P(3,8,'explosive',bw,blk,p2,dl)},
-          {name:'Guard Retention Pummeling — Wall Simulation', sets:'3×1 min continuous'},
-          {name:'Live Rolling / Grappling — with partner if available', sets:isD?'3–4 rounds × 5 min':dl?'2 rounds easy, technical only':isC?'3 rounds × 5 min':'2–3 rounds × 5 min'},
-        ]},
-        lift:{label:'LIFT — Lower Body Strength',color:'lift',items:[
-          {name:'Romanian Deadlift — Barbell', sets:P(4,5,'',bw,blk,p2,dl)},
-          {name:'Back Squat or Goblet Squat — Barbell / Dumbbell', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Walking Lunges — Dumbbell', sets:P(3,10,'per leg',bw,blk,p2,dl)},
-          {name:'Hip Thrust — Barbell + Bench', sets:P(3,10,'',bw,blk,p2,dl)},
-          {name:'Nordic Curl Negative — Feet Anchored on Bench', sets:P(3,5,'eccentric focus',bw,blk,p2,dl)},
-          {name:'Lateral Band Walk', sets:'3×20 steps each direction'},
-          {name:'Ab Wheel Rollout', sets:P(3,10,'',bw,blk,p2,dl)},
-          ...(isB?[{name:'Broad Jump — Explosive Intent', sets:P(3,5,'',bw,blk,p2,dl)}]:[]),
-          ...(isC?[{name:'Single-Leg Deadlift — Slow Eccentric', sets:P(3,6,'per leg',bw,blk,p2,dl)}]:[]),
-        ]}
       }
     },
     tuesday:{
-      name:'TUESDAY', tag:'Upper Body + Grip', tagClass:'tag-upper',
+      name:'TUESDAY', tag:'BJJ Training', tagClass:'tag-upper',
       segments:{
-        cardio:{label:'CARDIO / CONDITIONING',color:'cardio',items:[
-          {name:'Battle Ropes — Clinch Simulation Waves', sets:CT(20,bw,blk,p2,dl)},
-          {name:'Heavy Bag — Pummeling Combos + Footwork', sets:'3 rounds 2 min'},
+        yoga:{label:'PRE-CLASS WARM-UP — ~15 min',color:'yoga',items:[
+          {name:'Shoulder Capsule + Rotator Cuff Circles', sets:'5 min'},
+          {name:'Neck Mobility — Bridges + Side Tilt', sets:'4 min'},
+          {name:'Thoracic Rotation + Arm Swings', sets:'3 min'},
+          {name:'Hip Circles + Leg Swings', sets:'3 min'},
         ]},
-        yoga:{label:'MOBILITY / STRETCH',color:'yoga',items:[
-          {name:'Shoulder Capsule + Rotator Cuff Stretch', sets:'5 min'},
-          {name:'Wrist + Forearm Extensor Opener', sets:'4 min'},
-          {name:'Neck Mobility — Circles + Side Tilt', sets:'3 min'},
+        dg:{label:'BJJ — CLINCH / TAKEDOWN + ROLLING',color:'dg',items:[
+          {name:'Penetration Step Drill — Shot Simulation', sets:isD?'80% speed':isC?'65% speed':'50% controlled'},
+          {name:'Resistance Band Pummeling — Underhook Sim.', sets:'3×1 min continuous'},
+          {name:'Takedown / Clinch Entries — class drilling', sets:'~20 min technique'},
+          {name:'Live Rolling', sets:dl?'1–2 rounds technical only':isD?'4–5 rounds × 5 min':isC?'3–4 rounds × 5 min':'3 rounds × 5 min'},
+          {name:'Post-Roll: Forearm + Wrist Shake-out', sets:'3 min cooldown'},
         ]},
-        dg:{label:'BJJ — GRIP & CLINCH DRILLS',color:'dg',items:[
-          {name:'Dead Hang Grip Sets — Pull-up Bar', sets:`3×${20+bw*10}s hold`},
-          {name:'Towel Pull-up Hold — Collar Grip Simulation', sets:P(3,5,'',bw,blk,p2,dl)},
-          {name:'Resistance Band Pummeling — Underhook Simulation', sets:'3×1 min continuous'},
-        ]},
-        lift:{label:'LIFT — Pull + Push + Grip',color:'lift',items:[
-          {name:'Weighted Pull-ups — Pull-up Bar + Belt', sets:isC?P(4,4,'add weight',bw,blk,p2,dl):P(4,5,'',bw,blk,p2,dl)},
-          {name:'Barbell Rows — Overhand Grip', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Bench Press — Barbell', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Dips — Parallel Bars or Bench', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Hammer Curl — Dumbbell', sets:P(3,12,'',bw,blk,p2,dl)},
-          {name:'Forearm Roller — Loaded Dumbbell or Bar', sets:'4× full up + down'},
-          {name:'Ab Wheel Rollout', sets:P(3,10,'',bw,blk,p2,dl)},
-        ]}
       }
     },
     wednesday:{
-      name:'WEDNESDAY', tag:'Recovery + Flexibility', tagClass:'tag-recovery',
+      name:'WEDNESDAY', tag:'BJJ Training', tagClass:'tag-recovery',
       segments:{
-        cardio:{label:'CARDIO',color:'cardio',items:[
-          {name:'Stationary Bike or Walk — Easy Recovery', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
-        ]},
-        yoga:{label:'YOGA / FLEXIBILITY',color:'yoga',items:[
-          {name:'Full Body Yoga Flow — Mat', sets:'20 min'},
-          {name:'Deep Hip Openers — Pigeon + Lizard Pose', sets:'8 min'},
+        yoga:{label:'PRE-CLASS WARM-UP — ~15 min',color:'yoga',items:[
+          {name:'Full Body Joint Circles — neck to ankles', sets:'5 min'},
+          {name:'Deep Hip Openers — Lizard + Pigeon', sets:'5 min'},
           {name:'Spinal Twist + Back Bridge Stretch', sets:'5 min'},
-          {name:'Ankle Mobility Circles', sets:'2×15 per foot'},
         ]},
-        dg:{label:'BJJ — TECHNIQUE FLOW + LIGHT ROLLING',color:'dg',items:[
+        dg:{label:'BJJ — POSITIONAL / FLOW + LIGHT ROLLING',color:'dg',items:[
           {name:'Guard Position Isometric Hold — 90° Hip Flex', sets:'3×45s each side'},
-          {name:'Hip Escape Flow — Slow Controlled Reps', sets:'4×10 per side'},
-          {name:'Light Rolling — slow, positional only, no strength', sets:dl?'1–2 rounds easy':'2 rounds × 5 min, flow not fight'},
-          {name:'Mental Visualization — Guard Passing + Sweeps (if no roll)', sets:'10 min'},
+          {name:'Hip Escape Flow — slow and controlled', sets:'3×10 per side'},
+          {name:'Positional Drilling — class focus', sets:'~20 min technique'},
+          {name:'Rolling — '+(dl?'1 round easy, positional only':'flow rolling, technical, no ego')},
+          {name:'Post-Roll: Full Body Stretch — Mat', sets:'5 min'},
         ]},
-        lift:{label:'LIGHT LIFT — Recovery',color:'lift',items:[
-          {name:'Goblet Squat — Light Dumbbell', sets:dl?'2×12 light':'3×12'},
-          {name:'Push-Ups', sets:dl?'2×10':'3×15'},
-          {name:'Back Extensions — Adjustable Bench', sets:dl?'2×12':'3×15'},
-          {name:'Band Pull-Aparts', sets:'3×20'},
-          {name:'Kettlebell Swings', sets:dl?'2×15 light':'3×15'},
-          {name:'Dead Bug Core Hold', sets:'3×30s'},
-        ]}
       }
     },
     thursday:{
-      name:'THURSDAY', tag:'Explosive + Mat Conditioning', tagClass:'tag-explosive',
+      name:'THURSDAY', tag:'Lower Body Strength', tagClass:'tag-explosive',
       segments:{
-        cardio:{label:'CARDIO / AGILITY',color:'cardio',items:[
-          {name:'Sprawl Simulation — Drop to Ground + Pop Up Fast', sets:'4×8 reps'},
-          {name:'Level Change Drills — Fast Squat-to-Stand', sets:'4×10'},
-          {name:'Cone Sprints — 5-10-5 Shuttle', sets:'6 rounds'},
+        cardio:{label:'WARM-UP',color:'cardio',items:[
+          {name:'Cardio Bike — easy spin', sets:'5 min to get blood moving'},
         ]},
-        yoga:{label:'MOBILITY / STRETCH',color:'yoga',items:[
-          {name:'Dynamic Hip Circles + Leg Swings', sets:'5 min'},
-          {name:'Glute & Psoas Release — Mat', sets:'5 min'},
-          {name:'Ankle + Calf Mobility Work', sets:'3 min'},
+        yoga:{label:'MOBILITY — Pre-Lift',color:'yoga',items:[
+          {name:'Hip Flexor + Quad Stretch', sets:'3 min'},
+          {name:'Ankle + Calf Mobility', sets:'2 min'},
         ]},
-        dg:{label:'BJJ — EXPLOSIVE DRILLS + LIVE GRAPPLING',color:'dg',items:[
-          {name:'Penetration Step Drill — Wrestling Shot Simulation', sets:isD?'80% full speed':isC?'65% speed':'50% controlled speed'},
-          {name:'Double-Leg Entry with Resistance Band', sets:P(3,8,'per side',bw,blk,p2,dl)},
-          {name:'Grip-Break + Entry Combo — Band Resistance', sets:P(3,10,'per side',bw,blk,p2,dl)},
-          {name:'Live Grappling / Rolling — primary mat day', sets:isD?'4–5 rounds × 5 min':dl?'2 rounds easy, technical':isC?'3–4 rounds × 5 min':'3 rounds × 5 min'},
-        ]},
-        lift:{label:'LIFT — Power & Explosiveness',color:'lift',items:[
-          {name:'Box Jumps — '+(isC?'Max Height':isB?'High Box':'Mid Box'), sets:P(4,3,'max intent',bw,blk,p2,dl)},
-          {name:'Conventional Deadlift — Barbell', sets:isC?P(4,2,'heavy PR',bw,blk,p2,dl):P(4,3,'',bw,blk,p2,dl)},
-          {name:'Landmine Row — Explosive Pull', sets:P(4,5,'per side',bw,blk,p2,dl)},
-          {name:'Slam Ball — Overhead Slam', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Battle Rope — Alternating Waves', sets:`5×30s${bw>=2?' + 5s burst finish':''}`},
-          {name:'Broad Jump Series', sets:P(3,3,'',bw,blk,p2,dl)},
-          {name:'Ab Wheel Rollout', sets:P(3,10,'',bw,blk,p2,dl)},
-          ...(isD?[{name:'Reactive Med Ball Chest Pass — Wall', sets:P(3,8,'',bw,blk,p2,dl)}]:[]),
-          ...(isB?[{name:'Jump Squat — Bodyweight or Light Load', sets:P(3,5,'max pop',bw,blk,p2,dl)}]:[]),
+        lift:{label:'LIFT — Lower Body Strength (60 min)',color:'lift',items:[
+          {name:'Back Squat — Squat Rack', sets:P(4,4,'add weight ea. set',bw,blk,p2,dl)},
+          {name:'Barbell Hip Thrust — Bench + Barbell', sets:P(4,4,'',bw,blk,p2,dl)},
+          {name:'Leg Press — Machine', sets:P(3,5,'',bw,blk,p2,dl)},
+          {name:'Leg Curl Machine', sets:P(3,5,'3s eccentric',bw,blk,p2,dl)},
+          {name:'Glute / Hamstring Machine', sets:P(3,5,'squeeze at top',bw,blk,p2,dl)},
+          {name:'Kettlebell Swings — posterior chain finish', sets:dl?'2×10 light':'3×10 heavy'},
+          {name:'Ab Wheel Rollout', sets:P(3,8,'',bw,blk,p2,dl)},
+          ...(isC?[{name:'Single-Leg Hip Thrust — Dumbbell + Bench', sets:P(3,4,'per leg, slow eccentric',bw,blk,p2,dl)}]:[]),
         ]}
       }
     },
     friday:{
-      name:'FRIDAY', tag:'Pull + Core + Grappling', tagClass:'tag-pull',
+      name:'FRIDAY', tag:'Upper Body Strength', tagClass:'tag-pull',
       segments:{
-        cardio:{label:'CARDIO',color:'cardio',items:[
-          {name:'Rowing Machine — Moderate Pace', sets:CT(25,bw,blk,p2,dl)},
-          {name:'Jump Rope — Steady State', sets:'5 min'},
+        cardio:{label:'WARM-UP',color:'cardio',items:[
+          {name:'Rowing Machine — easy pace', sets:'5 min to warm shoulders'},
         ]},
-        yoga:{label:'MOBILITY / STRETCH',color:'yoga',items:[
-          {name:'Thoracic Rotation + Cat-Cow Stretch', sets:'5 min'},
-          {name:'Lats + Biceps Dead Hang — Pull-up Bar', sets:'3×30s'},
-          {name:'Forearm + Wrist Rolling Stretch', sets:'3 min'},
-          {name:'Hip 90/90 Stretch — Guard Position Simulation', sets:'3×30s per side'},
+        yoga:{label:'MOBILITY — Pre-Lift',color:'yoga',items:[
+          {name:'Shoulder Capsule + Sleeper Stretch', sets:'3 min'},
+          {name:'Wrist + Forearm Opener', sets:'2 min'},
         ]},
-        dg:{label:'BJJ — GUARD & CORE WORK',color:'dg',items:[
-          {name:'Hanging Leg Raises — Guard Position Simulation', sets:P(3,10,'',bw,blk,p2,dl)},
-          {name:'Bridging Series — Hip Bridge to Full Bridge', sets:P(3,8,'explosive',bw,blk,p2,dl)},
-          {name:'Isometric Knees-Up Hang — Pull-up Bar', sets:`3×${20+bw*10}s`},
-        ]},
-        lift:{label:'LIFT — Pull + Core Dominant',color:'lift',items:[
-          {name:'Weighted Pull-ups — Pull-up Bar + Belt', sets:isC?P(4,4,'add weight',bw,blk,p2,dl):P(4,5,'',bw,blk,p2,dl)},
-          {name:'Barbell Rows — Supinated Grip', sets:P(3,8,'',bw,blk,p2,dl)},
-          {name:'Cable or Band Face Pulls', sets:P(3,15,'',bw,blk,p2,dl)},
-          {name:'Dumbbell Rows — Single Arm', sets:P(3,10,'per side',bw,blk,p2,dl)},
-          {name:'Dead Hang — Max Hold', sets:'3× max, log seconds'},
-          {name:'Farmer Carry — Heavy Dumbbells', sets:dl?'3 trips 40ft light':'4 trips 40ft'},
-          {name:'Pallof Press — Cable or Band', sets:P(3,12,'per side',bw,blk,p2,dl)},
-          {name:'Ab Wheel Rollout', sets:P(3,10,'',bw,blk,p2,dl)},
+        lift:{label:'LIFT — Upper Body Strength (60 min)',color:'lift',items:[
+          {name:'Bench Press — Barbell', sets:P(4,4,'',bw,blk,p2,dl)},
+          {name:'Dumbbell Arnold Press', sets:P(3,5,'',bw,blk,p2,dl)},
+          {name:'Lat Pulldown — Machine', sets:P(4,5,'full stretch at top',bw,blk,p2,dl)},
+          {name:'Machine Row or Barbell Row', sets:P(3,5,'',bw,blk,p2,dl)},
+          {name:'Weighted Dips — Dip Bar + Belt', sets:P(3,5,'',bw,blk,p2,dl)},
+          {name:'Chest Fly — Machine or Cable', sets:P(3,6,'controlled stretch',bw,blk,p2,dl)},
+          {name:'Tricep Machine — Pushdown or Overhead', sets:P(3,6,'',bw,blk,p2,dl)},
+          {name:'Face Pulls — Cable or Machine', sets:'3×12 — shoulder health, do not skip'},
+          ...(isB?[{name:'Kettlebell Row — Single Arm, Explosive', sets:P(3,5,'per side',bw,blk,p2,dl)}]:[]),
+          ...(isD?[{name:'Dead Hang — Pull-up Bar Max Hold', sets:'3× max, log seconds'}]:[]),
         ]}
       }
     },
     saturday:{
-      name:'SATURDAY', tag:'Rolling Circuit', tagClass:'tag-circuit',
+      name:'SATURDAY', tag:'Rest', tagClass:'tag-rest', isRest:true,
       segments:{
-        cardio:{label:'CONDITIONING',color:'cardio',items:[
-          {name:'Jump Rope — 1 min on / 30s off Intervals', sets:'5 rounds'},
-          {name:'Heavy Bag — 3 min rounds, pummeling focus', sets:'3 rounds'},
-          ...(dl?[]:[{name:'Sprawl Sprint Combo — Sprawl + Immediate Sprint', sets:'4×8'}]),
-        ]},
-        yoga:{label:'STRETCH',color:'yoga',items:[
-          {name:'Full Body Recovery Stretch — Mat', sets:'12 min'},
-          {name:'Deep Hip + Spine Opener', sets:'5 min'},
-        ]},
-        dg:{label:'BJJ — POSITIONAL CIRCUIT',color:'dg',items:[
-          {name:'Rolling Simulation — 5 min round, full effort', sets:isD?'4 rounds high intensity':'3 rounds'},
-          {name:'Guard Retention Circuit — Shrimp + Frame + Kick', sets:'3×10 combinations'},
-          {name:'Takedown Entry Sim. — Shot + Level Change', sets:'10 full reps each side'},
-        ]},
-        lift:{label:dl?'CIRCUIT — 2 Rounds (light)':'CIRCUIT — 3–4 Rounds',color:'lift',items:[
-          {name:'Kettlebell Swings', sets:dl?'×12 light':'×15'},
-          {name:'Push-Ups', sets:dl?'×10':'×15'},
-          {name:'Pull-Ups — Bodyweight', sets:'×max'},
-          {name:'Slam Ball Slams', sets:'×10'},
-          {name:'Ab Wheel', sets:'×10'},
-          {name:'Hip Escapes (Shrimping) — Mat', sets:'×10 per side'},
-          {name:'Bridge to Sit-Out Flow', sets:'×8 per side'},
-          ...(dl?[]:[{name:'Broad Jump', sets:'×5'}]),
-          ...(dl?[]:[{name:'Resistance Band Monster Walks', sets:'×20 fwd + back'}]),
-          ...(dl?[]:[{name:'Dumbbell Lateral Raise', sets:'×15'}]),
+        yoga:{label:'OPTIONAL RECOVERY — keep it gentle',color:'yoga',items:[
+          {name:'Light walk — outdoors', sets:'20–30 min if you want'},
+          {name:'Foam roll + full body stretch — Mat', sets:'10 min optional'},
+          {name:'Mental game — visualize your positions and submissions', sets:'10 min'},
         ]}
       }
     },
     sunday:{
       name:'SUNDAY', tag:'Rest', tagClass:'tag-rest', isRest:true,
       segments:{
-        yoga:{label:'ACTIVE RECOVERY — Optional',color:'yoga',items:[
-          {name:'Walk or light movement — outdoors', sets:'30+ min'},
-          {name:'Foam roll + full body stretch — Mat', sets:'15 min'},
-          {name:'Guard position isometric hold — casual', sets:'5 min optional'},
-          {name:'Mental visualization — game plan your positions', sets:'10 min'},
+        yoga:{label:'OPTIONAL RECOVERY',color:'yoga',items:[
+          {name:'Light walk or easy movement', sets:'20–30 min if you want'},
+          {name:'Hip + shoulder stretch — Mat', sets:'10 min optional'},
         ]}
       }
     }
@@ -205,12 +136,12 @@ function buildDays(w){
 
 function weekProgNote(w){
   const bw=blockWeek(w), blk=getBlock(w), p2=isPhase2(w), dl=DELOAD_WEEKS.has(w);
-  if(dl) return{title:'🟡 DELOAD WEEK — Mandatory Recovery',body:'Cut all lifting sets by 2 and use ~60% weight. No PRs. Drilling stays light and technical — focus on form not intensity. Rolling simulation is casual. Recovery is when you adapt and get stronger.'};
+  if(dl) return{title:'🟡 DELOAD WEEK — Mandatory Recovery',body:'Cut all lift sets by 2 and use ~60% weight. No PRs. BJJ rolling stays technical and light — no ego rounds. Your body adapts during recovery. Skipping deload is the fastest way to stall.'};
   const bNotes={
-    A:'BLOCK A FOCUS: Build your base. Learn the movement patterns under load, establish starting weights. Drilling focus is form and position over speed.',
-    B:'BLOCK B FOCUS: Explosive transitions. Fast intent on every lift. BJJ drills shift to reactive — entry speed, weight commitment, and timing.',
-    C:'BLOCK C FOCUS: Heavy strength work. Lower reps, more load, PR attempts. Build the raw grappling strength that wins scrambles and positions.',
-    D:'BLOCK D FOCUS: Athletic integration. Lower volume, high intent. Rolling simulation at 70–80% effort. Everything converts to mat power.'
+    A:'BLOCK A FOCUS: Establish your strength baseline. Learn these movements at these loads. Record every weight — everything progresses from here. BJJ: focus on technique and position over energy.',
+    B:'BLOCK B FOCUS: Bar speed on every lift. Move the weight with intent. BJJ: start committing to explosive entries and takedown shots. Strength builds in the gym, timing builds on the mat.',
+    C:'BLOCK C FOCUS: Heavy strength work. Lower reps, more load, PR attempts. This is where your grappling strength gets built. BJJ: use that new strength to control positions, not muscle through them.',
+    D:'BLOCK D FOCUS: Lower volume, high intent. Every set should feel athletic. BJJ: this is your peak — rolling should feel efficient and powerful. Trust the 12 weeks of work behind you.'
   };
   const wNotes=['','WEEK 1 OF BLOCK — Establish baseline. Learn at these loads. Record every weight.','WEEK 2 OF BLOCK — Add 1 set to all main lifts. Push past comfort slightly.','WEEK 3 OF BLOCK — Max volume week. Add 2 sets, go after PRs. Peak output.',''];
   return{title:`📈 ${p2?'PHASE 2 — ':''}BLOCK ${blk} — WEEK ${bw}/4`,body:`${wNotes[bw]||''} ${bNotes[blk]}`};
