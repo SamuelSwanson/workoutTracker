@@ -35,13 +35,13 @@ function tone(freq,dur,vol,type,delay){
     osc.start(t); osc.stop(t+dur+0.05);
   }catch(e){}
 }
-// square wave = much louder / more piercing for work/countdown
-// sine kept for rest tones so they feel calmer
-function sndCountdown(){ tone(880,0.10,0.9,'square'); }
-function sndWork(){ tone(1047,0.12,0.9,'square'); tone(1047,0.18,0.9,'square',0.18); }
-function sndRestEx(){ tone(600,0.22,0.8,'sine'); }
-function sndRestRnd(){ tone(520,0.08,0.8,'sine'); tone(392,0.40,0.75,'sine',0.1); }
-function sndDone(){ tone(784,0.15,0.9,'square'); tone(1047,0.15,0.9,'square',0.22); tone(1319,0.35,0.9,'square',0.44); }
+// All tones: same frequency + square wave so they cut through music
+var BEEP_HZ=1047, BEEP_VOL=0.9;
+function sndCountdown(){ tone(BEEP_HZ,0.10,BEEP_VOL,'square'); }
+function sndWork(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.20); }
+function sndRestEx(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); }
+function sndRestRnd(){ tone(BEEP_HZ,0.70,BEEP_VOL,'square'); }
+function sndDone(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.20); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.40); }
 
 // ── STATE ──────────────────────────────────────────────────────
 var _phase='idle',_cdCount=0,_leftMs=0,_totalMs=0;

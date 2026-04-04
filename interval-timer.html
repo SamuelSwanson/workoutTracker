@@ -223,29 +223,35 @@
 
 <script>
 // ── AUDIO ──────────────────────────────────────────────────────────────
-let _actx = null;
+let _actx=null, _comp=null;
 function getCtx(){
-  if(!_actx||_actx.state==='closed')
+  if(!_actx||_actx.state==='closed'){
     _actx=new(window.AudioContext||window.webkitAudioContext)();
+    _comp=_actx.createDynamicsCompressor();
+    _comp.threshold.value=-6; _comp.knee.value=3;
+    _comp.ratio.value=20; _comp.attack.value=0.001; _comp.release.value=0.1;
+    _comp.connect(_actx.destination);
+  }
   if(_actx.state==='suspended') _actx.resume();
-  return _actx;
+  return {ctx:_actx, dest:_comp||_actx.destination};
 }
-function tone(freq,dur,vol=0.55,type='sine',delay=0){
+function tone(freq,dur,vol=0.9,type='sine',delay=0){
   try{
-    const ctx=getCtx(), t=ctx.currentTime+delay;
+    const {ctx,dest}=getCtx(), t=ctx.currentTime+delay;
     const osc=ctx.createOscillator(), gain=ctx.createGain();
     osc.type=type; osc.frequency.value=freq;
     gain.gain.setValueAtTime(vol,t);
     gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
-    osc.connect(gain); gain.connect(ctx.destination);
+    osc.connect(gain); gain.connect(dest);
     osc.start(t); osc.stop(t+dur+0.05);
   }catch(e){}
 }
-function sndCountdown(){ tone(660,0.12,0.4); }
-function sndWork(){ tone(940,0.14,0.65); tone(940,0.18,0.65,'sine',0.22); }
-function sndRestEx(){ tone(520,0.25,0.4); }           // single soft mid beep
-function sndRestRnd(){ tone(480,0.08,0.5); tone(360,0.45,0.45,'sine',0.1); } // low descending
-function sndDone(){ tone(660,0.18,0.6); tone(880,0.18,0.6,'sine',0.28); tone(1100,0.4,0.6,'sine',0.56); }
+const BEEP_HZ=1047, BEEP_VOL=0.9;
+function sndCountdown(){ tone(BEEP_HZ,0.10,BEEP_VOL,'square'); }
+function sndWork(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.20); }
+function sndRestEx(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); }
+function sndRestRnd(){ tone(BEEP_HZ,0.70,BEEP_VOL,'square'); }
+function sndDone(){ tone(BEEP_HZ,0.12,BEEP_VOL,'square'); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.20); tone(BEEP_HZ,0.12,BEEP_VOL,'square',0.40); }
 
 // ── STATE ──────────────────────────────────────────────────────────────
 // phases: idle | countdown | work | rest-ex | rest-rnd | done
