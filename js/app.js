@@ -79,12 +79,32 @@ function renderWeek(){
   const dg=document.getElementById('daysGrid');
   Object.keys(days).forEach(dayKey=>{
     const day=days[dayKey], dayDone=wData[`day_done_${dayKey}`]===true, exStates=wData[`ex_${dayKey}`]||{};
+    // Collect all exercise names across every segment for the day timer
+    let dayTimerBtn='';
+    if(!day.isRest&&window._timerLoaded){
+      if(!window._dayEx) window._dayEx={};
+      const allNames=[];
+      Object.keys(day.segments).forEach(sk=>{
+        if(day.segments[sk].color==='lift')
+          day.segments[sk].items.forEach(ex=>allNames.push(ex.name.split('—')[0].trim()));
+      });
+      window._dayEx[`${w}_${dayKey}`]=allNames;
+      if(allNames.length>0)
+        dayTimerBtn=`<button class="day-timer-btn" title="Start interval timer for this day" onclick="openTimerModal(window._dayEx['${w}_${dayKey}'])">⏱</button>`;
+    }
+
     const card=document.createElement('div');
     card.className='day-card'+(day.isRest?' rest':'');
     let segHtml='';
     Object.keys(day.segments).forEach(segKey=>{
       const seg=day.segments[segKey];
-      segHtml+=`<div class="segment"><div class="seg-label"><div class="seg-dot ${seg.color}"></div>${seg.label}</div><ul class="exercise-list">`;
+      let timerBtn='';
+      if(seg.color==='lift'&&window._timerLoaded){
+        if(!window._liftEx) window._liftEx={};
+        window._liftEx[`${w}_${dayKey}`]=seg.items.map(ex=>ex.name.split('—')[0].trim());
+        timerBtn=`<button class="seg-timer-btn" onclick="openTimerModal(window._liftEx['${w}_${dayKey}'])">⏱ TIMER</button>`;
+      }
+      segHtml+=`<div class="segment"><div class="seg-label"><div class="seg-dot ${seg.color}"></div>${seg.label}${timerBtn}</div><ul class="exercise-list">`;
       seg.items.forEach((ex,i)=>{
         const exId=`${dayKey}_${segKey}_${i}`, done=exStates[exId]===true;
         const infoKey=`${w}_${dayKey}_${segKey}_${i}`; _exInfo[infoKey]={name:ex.name,sets:ex.sets};
@@ -92,7 +112,7 @@ function renderWeek(){
       });
       segHtml+=`</ul></div>`;
     });
-    card.innerHTML=`<div class="day-header"><div class="day-name">${day.name}</div><div class="day-tag ${day.tagClass}">${day.tag}</div></div><div class="day-body">${segHtml}<div class="day-notes-wrap"><div class="day-notes-label">Day Notes</div><textarea class="day-notes-input" placeholder="How did it go? Weights, reps, how you felt..."></textarea></div><button class="day-complete-btn ${dayDone?'done':''}" onclick="toggleDay('${w}','${dayKey}',this)">${dayDone?'✓ DAY COMPLETE':'MARK DAY COMPLETE'}</button></div>`;
+    card.innerHTML=`<div class="day-header"><div class="day-name">${day.name}</div><div class="day-header-right"><div class="day-tag ${day.tagClass}">${day.tag}</div>${dayTimerBtn}</div></div><div class="day-body">${segHtml}<div class="day-notes-wrap"><div class="day-notes-label">Day Notes</div><textarea class="day-notes-input" placeholder="How did it go? Weights, reps, how you felt..."></textarea></div><button class="day-complete-btn ${dayDone?'done':''}" onclick="toggleDay('${w}','${dayKey}',this)">${dayDone?'✓ DAY COMPLETE':'MARK DAY COMPLETE'}</button></div>`;
     dg.appendChild(card);
     const dn=card.querySelector('.day-notes-input');
     dn.value=wData[`day_notes_${dayKey}`]||'';
