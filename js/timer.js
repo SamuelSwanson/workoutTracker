@@ -7,30 +7,41 @@
 'use strict';
 
 // ── AUDIO ──────────────────────────────────────────────────────
-let _actx=null;
+var _actx=null, _comp=null;
 function getCtx(){
-  if(!_actx||_actx.state==='closed')
+  if(!_actx||_actx.state==='closed'){
     _actx=new(window.AudioContext||window.webkitAudioContext)();
+    // Compressor maximises perceived loudness without clipping
+    _comp=_actx.createDynamicsCompressor();
+    _comp.threshold.value=-6;
+    _comp.knee.value=3;
+    _comp.ratio.value=20;
+    _comp.attack.value=0.001;
+    _comp.release.value=0.1;
+    _comp.connect(_actx.destination);
+  }
   if(_actx.state==='suspended')_actx.resume();
-  return _actx;
+  return {ctx:_actx,dest:_comp||_actx.destination};
 }
 function tone(freq,dur,vol,type,delay){
-  vol=vol||0.55; type=type||'sine'; delay=delay||0;
+  vol=vol||0.9; type=type||'sine'; delay=delay||0;
   try{
-    const ctx=getCtx(),t=ctx.currentTime+delay;
-    const osc=ctx.createOscillator(),gain=ctx.createGain();
+    var ac=getCtx(),ctx=ac.ctx,dest=ac.dest,t=ctx.currentTime+delay;
+    var osc=ctx.createOscillator(),gain=ctx.createGain();
     osc.type=type; osc.frequency.value=freq;
     gain.gain.setValueAtTime(vol,t);
     gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
-    osc.connect(gain); gain.connect(ctx.destination);
+    osc.connect(gain); gain.connect(dest);
     osc.start(t); osc.stop(t+dur+0.05);
   }catch(e){}
 }
-function sndCountdown(){ tone(660,0.12,0.4); }
-function sndWork(){ tone(940,0.14,0.65); tone(940,0.18,0.65,'sine',0.22); }
-function sndRestEx(){ tone(520,0.25,0.4); }
-function sndRestRnd(){ tone(480,0.08,0.5); tone(360,0.45,0.45,'sine',0.1); }
-function sndDone(){ tone(660,0.18,0.6); tone(880,0.18,0.6,'sine',0.28); tone(1100,0.4,0.6,'sine',0.56); }
+// square wave = much louder / more piercing for work/countdown
+// sine kept for rest tones so they feel calmer
+function sndCountdown(){ tone(880,0.10,0.9,'square'); }
+function sndWork(){ tone(1047,0.12,0.9,'square'); tone(1047,0.18,0.9,'square',0.18); }
+function sndRestEx(){ tone(600,0.22,0.8,'sine'); }
+function sndRestRnd(){ tone(520,0.08,0.8,'sine'); tone(392,0.40,0.75,'sine',0.1); }
+function sndDone(){ tone(784,0.15,0.9,'square'); tone(1047,0.15,0.9,'square',0.22); tone(1319,0.35,0.9,'square',0.44); }
 
 // ── STATE ──────────────────────────────────────────────────────
 var _phase='idle',_cdCount=0,_leftMs=0,_totalMs=0;
@@ -191,16 +202,11 @@ function tmBeginDone(){
 }
 
 // ── DISPLAY ────────────────────────────────────────────────────
+function pad2(n){ var s=String(n); return s.length<2?'0'+s:s; }
 function fmtMs(ms){
   var s=Math.max(0,Math.ceil(ms/1000));
-  return String(Math.floor(s/60)).padStart('00',2)+':'+String(s%60).padStart('00',2);
+  return pad2(Math.floor(s/60))+':'+pad2(s%60);
 }
-// padStart polyfill-safe wrapper
-String.prototype.padStart=String.prototype.padStart||function(targetLen,padStr){
-  var str=String(this);
-  while(str.length<targetLen) str=padStr+str;
-  return str;
-};
 
 function tmGetExNameText(){
   if(!_exNames.length) return '';
@@ -231,9 +237,7 @@ function tmRenderCountdown(){
 }
 function tmRenderIdle(){
   var cfg=tmReadSettings();
-  var mm=String(Math.floor(cfg.workMs/60000)).padStart('00',2);
-  var ss=String(Math.floor((cfg.workMs%60000)/1000)).padStart('00',2);
-  tmSetFace('idle','READY',mm+':'+ss,'','— / —','ROUND — / —',0,0);
+  tmSetFace('idle','READY',pad2(Math.floor(cfg.workMs/60000))+':'+pad2(Math.floor((cfg.workMs%60000)/1000)),'','— / —','ROUND — / —',0,0);
 }
 function tmRenderDone(){
   tmSetFace('done','DONE','✓','All done!',
@@ -286,6 +290,14 @@ function tmFlashWork(){
     if(el){el.style.borderColor='#f75a3a';setTimeout(function(){el.style.borderColor='';},800);}
   });
 }
+
+// ── SAFE ONCLICK HELPERS (avoids bracket-notation in HTML attrs on Android) ──
+window.tmOpenDayTimer=function(key){
+  openTimerModal((window._dayEx&&window._dayEx[key])||[]);
+};
+window.tmOpenSegTimer=function(key){
+  openTimerModal((window._liftEx&&window._liftEx[key])||[]);
+};
 
 // ── INJECT PANEL + NAV BUTTON ──────────────────────────────────
 (function inject(){

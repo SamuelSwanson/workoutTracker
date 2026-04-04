@@ -90,7 +90,7 @@ function renderWeek(){
       });
       window._dayEx[`${w}_${dayKey}`]=allNames;
       if(allNames.length>0)
-        dayTimerBtn=`<button class="day-timer-btn" title="Start interval timer for this day" onclick="openTimerModal(window._dayEx['${w}_${dayKey}'])">⏱</button>`;
+        dayTimerBtn=`<button class="day-timer-btn" title="Start interval timer for this day" onclick="tmOpenDayTimer('${w}_${dayKey}')">⏱</button>`;
     }
 
     const card=document.createElement('div');
@@ -102,7 +102,7 @@ function renderWeek(){
       if(seg.color==='lift'&&window._timerLoaded){
         if(!window._liftEx) window._liftEx={};
         window._liftEx[`${w}_${dayKey}`]=seg.items.map(ex=>ex.name.split('—')[0].trim());
-        timerBtn=`<button class="seg-timer-btn" onclick="openTimerModal(window._liftEx['${w}_${dayKey}'])">⏱ TIMER</button>`;
+        timerBtn=`<button class="seg-timer-btn" onclick="tmOpenSegTimer('${w}_${dayKey}')">⏱ TIMER</button>`;
       }
       segHtml+=`<div class="segment"><div class="seg-label"><div class="seg-dot ${seg.color}"></div>${seg.label}${timerBtn}</div><ul class="exercise-list">`;
       seg.items.forEach((ex,i)=>{
