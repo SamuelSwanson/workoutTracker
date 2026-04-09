@@ -16,9 +16,7 @@ function buildDays(w){
           {name:'Speed Jump Rope — warm-up', sets:'3 min'},
         ]},
         yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Lower Body Focus',color:'yoga',items:[
-          {name:'Hip Flexor & Piriformis Flow — Yoga Mat', sets:'8 min'},
-          {name:'Thoracic Rotation & Windmill Stretch', sets:'5 min'},
-          {name:'Balance Board — Eyes Open Holds', sets:bw>=2?'6 min':'5 min'},
+          {name:'Peloton Yoga/Stretch — Lower Body Focus', sets:'~20 min'},
         ]},
         dg:{label:'DISC GOLF — COIL FOCUS',color:'dg',items:[
           {name:'Coil Drill — Resistance Handle Band on Disc', sets:P(3,10,'per side',bw,blk,p2,dl)},
@@ -49,9 +47,7 @@ function buildDays(w){
           {name:'Heavy Jump Rope — 2min power intervals', sets:'3 rounds'},
         ]},
         yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body Focus',color:'yoga',items:[
-          {name:'Shoulder Capsule Stretch — Yoga Ball assist', sets:'5 min'},
-          {name:'Wrist & Forearm Opener — Yoga Mat', sets:'4 min'},
-          {name:'Lat + T-Spine Hang — Pull-up Bar', sets:'3×30s dead hang'},
+          {name:'Peloton Yoga/Stretch — Upper Body Focus', sets:'~15 min'},
         ]},
         dg:{label:'DISC GOLF — LAG & SNAP',color:'dg',items:[
           {name:'Lag Drills — TechDisc feedback', sets:'10 min focused'},
@@ -93,9 +89,7 @@ function buildDays(w){
       name:'THURSDAY', tag:'Explosive + Power', tagClass:'tag-explosive',
       segments:{
         yoga:{label:'PRE-CIRCUIT PELOTON YOGA/STRETCH — Full Body Warm-up',color:'yoga',items:[
-          {name:'Dynamic Hip Circles + Leg Swings', sets:'5 min'},
-          {name:'Glute & Psoas Release — Yoga Mat', sets:'5 min'},
-          {name:'Ankle Mobility — Small Loop Band Assisted', sets:'3 min'},
+          {name:'Peloton Yoga/Stretch — Full Body Warm-up', sets:'~13 min'},
         ]},
         dg:{label:'DISC GOLF — FULL THROWS',color:'dg',items:[
           {name:'Full Throws into Net — Various Discs', sets:isD?'70–80% full power':isC?'60–70% power':'50–60% power'},
@@ -129,10 +123,7 @@ function buildDays(w){
           {name:'Heavy Jump Rope — Steady State', sets:'5 min'},
         ]},
         yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body / Pull Focus',color:'yoga',items:[
-          {name:'Thoracic Opener over Yoga Ball', sets:'5 min'},
-          {name:'Lats & Biceps Hang Stretch — Pull-up Bar', sets:'3×30s'},
-          {name:'Forearm & Wrist Figure-8s', sets:'3 min'},
-          {name:'Balance Board — Single Leg Static Hold', sets:'3×30s per leg'},
+          {name:'Peloton Yoga/Stretch — Upper Body / Pull Focus', sets:'~15 min'},
         ]},
         dg:{label:'DISC GOLF — SNAP & LINES',color:'dg',items:[
           {name:'Snap Drills — TechDisc', sets:'10 min'},
@@ -162,8 +153,7 @@ function buildDays(w){
           ...(dl?[]:[{name:'Battle Rope — Tabata 20s on/10s off', sets:'4 rounds'}]),
         ]},
         yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
-          {name:'Full Body Recovery Stretch — Yoga Mat', sets:'12 min'},
-          {name:'Yoga Ball — Spinal Decompression', sets:'5 min'},
+          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'~17 min'},
         ]},
         dg:{label:'DISC GOLF — FIELD DAY',color:'dg',items:[
           {name:'Field Work — Various Discs', sets:isD?'Full game-speed session':'Free practice'},
@@ -193,10 +183,7 @@ function buildDays(w){
           {name:'Peloton — Easy Recovery Ride', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
         ]},
         yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
-          {name:'Full Body Yoga Flow — Yoga Mat', sets:'20 min'},
-          {name:'Yoga Ball — Thoracic Extension Hold', sets:'3×45s'},
-          {name:'Balance Board — Eyes Closed Holds', sets:bw>=2?'6 min':'5 min'},
-          {name:'Ankle Mobility Circles — Small Loop Bands', sets:'2×15 circles per foot'},
+          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'~20 min'},
         ]},
         lift:{label:'LIGHT LIFT — Recovery Focus',color:'lift',items:[
           {name:'Goblet Squat — Kettlebell', sets:dl?'2×12 light':'3×12'},
