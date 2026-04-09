@@ -15,8 +15,8 @@ function buildDays(w){
           {name:'Peloton — Zone 2 Steady Ride', sets:CT(30,bw,blk,p2,dl)},
           {name:'Speed Jump Rope — warm-up', sets:'3 min'},
         ]},
-        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Lower Body Focus',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Lower Body Focus', sets:'~20 min'},
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Lower Body Activation',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Lower Body Activation', sets:'5-8 min'},
         ]},
         dg:{label:'DISC GOLF — COIL FOCUS',color:'dg',items:[
           {name:'Coil Drill — Resistance Handle Band on Disc', sets:P(3,10,'per side',bw,blk,p2,dl)},
@@ -36,7 +36,10 @@ function buildDays(w){
           {name:'Ab Roller', sets:P(3,10,'',bw,blk,p2,dl)},
           ...(isB?[{name:'Lateral Bounds over Mini Hurdle', sets:P(3,5,'per side',bw,blk,p2,dl)}]:[]),
           ...(isC?[{name:'Nordic Curls — Feet anchored Adjustable Bench', sets:P(3,5,'eccentric focus',bw,blk,p2,dl)}]:[]),
-        ]}
+        ]},
+        yoga_post:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Lower Body Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Lower Body Recovery', sets:'10-15 min'},
+        ]},
       }
     },
     tuesday:{
@@ -46,8 +49,8 @@ function buildDays(w){
           {name:'Punching Bag — Speed Combos + Footwork', sets:CT(25,bw,blk,p2,dl)},
           {name:'Heavy Jump Rope — 2min power intervals', sets:'3 rounds'},
         ]},
-        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body Focus',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Upper Body Focus', sets:'~15 min'},
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body Activation',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Upper Body Activation', sets:'5-8 min'},
         ]},
         dg:{label:'DISC GOLF — LAG & SNAP',color:'dg',items:[
           {name:'Lag Drills — TechDisc feedback', sets:'10 min focused'},
@@ -64,7 +67,10 @@ function buildDays(w){
           {name:'Forearm Roller — Wood Dowel + Weighted Dog Leash', sets:'3× full up + down'},
           {name:'Curl Bar — Bicep Curls', sets:P(3,12,'',bw,blk,p2,dl)},
           {name:'Ab Roller', sets:P(3,10,'',bw,blk,p2,dl)},
-        ]}
+        ]},
+        yoga_post:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Upper Body Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Upper Body Recovery', sets:'10-15 min'},
+        ]},
       }
     },
     wednesday:{
@@ -88,8 +94,8 @@ function buildDays(w){
     thursday:{
       name:'THURSDAY', tag:'Explosive + Power', tagClass:'tag-explosive',
       segments:{
-        yoga:{label:'PRE-CIRCUIT PELOTON YOGA/STRETCH — Full Body Warm-up',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Full Body Warm-up', sets:'~13 min'},
+        yoga:{label:'PRE-CIRCUIT PELOTON YOGA/STRETCH — Full Body Activation',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Full Body Activation', sets:'5-8 min'},
         ]},
         dg:{label:'DISC GOLF — FULL THROWS',color:'dg',items:[
           {name:'Full Throws into Net — Various Discs', sets:isD?'70–80% full power':isC?'60–70% power':'50–60% power'},
@@ -113,6 +119,9 @@ function buildDays(w){
           ...(isB?[{name:'Mace — Alternating 10-to-2', sets:P(3,10,'per side',bw,blk,p2,dl)}]:[]),
           ...(isD?[{name:'Mace Spear + 360 Combo — Mace Bell', sets:P(3,10,'per direction',bw,blk,p2,dl)}]:[]),
         ]},
+        yoga_post:{label:'POST-CIRCUIT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'10-15 min'},
+        ]},
       }
     },
     friday:{
@@ -122,8 +131,8 @@ function buildDays(w){
           {name:'Punching Bag — Power Combo Rounds', sets:CT(25,bw,blk,p2,dl)},
           {name:'Heavy Jump Rope — Steady State', sets:'5 min'},
         ]},
-        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body / Pull Focus',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Upper Body / Pull Focus', sets:'~15 min'},
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body / Pull Activation',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Upper Body / Pull Activation', sets:'5-8 min'},
         ]},
         dg:{label:'DISC GOLF — SNAP & LINES',color:'dg',items:[
           {name:'Snap Drills — TechDisc', sets:'10 min'},
@@ -141,7 +150,10 @@ function buildDays(w){
           {name:'Forearm Roller — Loaded Dog Leash', sets:'4× up + down'},
           {name:'Pallof Press — Large Loop Band', sets:P(3,12,'per side',bw,blk,p2,dl)},
           {name:'Ab Roller', sets:P(3,10,'',bw,blk,p2,dl)},
-        ]}
+        ]},
+        yoga_post:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Upper Body / Pull Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Upper Body / Pull Recovery', sets:'10-15 min'},
+        ]},
       }
     },
     saturday:{
@@ -151,9 +163,6 @@ function buildDays(w){
           {name:'Speed Jump Rope — Double Unders', sets:'5 min'},
           {name:'Heavy Jump Rope — Power sets', sets:'5 min'},
           ...(dl?[]:[{name:'Battle Rope — Tabata 20s on/10s off', sets:'4 rounds'}]),
-        ]},
-        yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'~17 min'},
         ]},
         dg:{label:'DISC GOLF — FIELD DAY',color:'dg',items:[
           {name:'Field Work — Various Discs', sets:isD?'Full game-speed session':'Free practice'},
@@ -173,7 +182,10 @@ function buildDays(w){
           ...(dl?[]:[{name:'Box — Broad Jump', sets:'×5'}]),
           ...(dl?[]:[{name:'Large Loop Band — Monster Walks', sets:'×20 fwd + back'}]),
           ...(dl?[]:[{name:'Dumbbell — Lateral Raise', sets:'×15'}]),
-        ]}
+        ]},
+        yoga_post:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'10-15 min'},
+        ]},
       }
     },
     sunday:{
@@ -181,9 +193,6 @@ function buildDays(w){
       segments:{
         cardio:{label:'CARDIO',color:'cardio',items:[
           {name:'Peloton — Easy Recovery Ride', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
-        ]},
-        yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
-          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'~20 min'},
         ]},
         lift:{label:'LIGHT LIFT — Recovery Focus',color:'lift',items:[
           {name:'Goblet Squat — Kettlebell', sets:dl?'2×12 light':'3×12'},
@@ -197,7 +206,10 @@ function buildDays(w){
           {name:'Yoga Ball — Dead Bug Core Hold', sets:'3×30s'},
           {name:'Resistance Band — Face Pulls large loop', sets:'3×20'},
           {name:'Mental Game — Visualization', sets:'10 min — plan the round, rehearse shots'},
-        ]}
+        ]},
+        yoga_post:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
+          {name:'Peloton Yoga/Stretch — Full Body Recovery', sets:'15-20 min'},
+        ]},
       }
     }
   };
