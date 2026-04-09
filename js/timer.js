@@ -52,7 +52,7 @@ var _tickId=null,_lastTick=0,_paused=false;
 
 // ── DOM REFS ───────────────────────────────────────────────────
 var $face,$phase,$exName,$digits,$exLabel,$rndLabel;
-var $fillIntv,$fillRnd,$btnStart,$btnPause;
+var $fillIntv,$fillRnd,$btnStart,$btnPause,$btnSkip;
 
 function getDom(){
   $face    =document.getElementById('tmFace');
@@ -65,6 +65,7 @@ function getDom(){
   $fillRnd =document.getElementById('tmFillRnd');
   $btnStart=document.getElementById('tmBtnStart');
   $btnPause=document.getElementById('tmBtnPause');
+  $btnSkip =document.getElementById('tmBtnSkip');
 }
 
 // ── PUBLIC API ─────────────────────────────────────────────────

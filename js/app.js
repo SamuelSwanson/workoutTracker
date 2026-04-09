@@ -21,6 +21,8 @@ let _exInfo={};
 
 function getState(){ try{return JSON.parse(localStorage.getItem(_cfg.storageKey)||'{}')}catch(e){return{}} }
 function saveState(s){ localStorage.setItem(_cfg.storageKey,JSON.stringify(s)) }
+function saveWeekState(){ localStorage.setItem(_cfg.storageKey+'_week',JSON.stringify({phase:currentPhase,week:currentWeek})) }
+function restoreWeekState(){ try{const w=JSON.parse(localStorage.getItem(_cfg.storageKey+'_week')||'{}');if(w.phase!==undefined)currentPhase=w.phase;if(w.week!==undefined)currentWeek=w.week;}catch(e){} }
 
 // ── RENDER GRID ────────────────────────────────────────────────
 function renderGrid(){
@@ -34,7 +36,7 @@ function renderGrid(){
     const btn=document.createElement('div');
     btn.className='week-btn'+(currentWeek===w?' active':'')+(completed?' completed':'')+(deload?' deload':'');
     btn.innerHTML=`<div class="wnum">W${w}</div><div class="wlabel">${deload?'DELOAD':getBlock(w)+blockWeek(w)}</div><div class="prog-bar" style="width:${Math.round((daysComplete/6)*100)}%"></div><div class="check">✓</div>`;
-    btn.onclick=()=>{currentWeek=w;renderGrid();renderWeek();};
+    btn.onclick=()=>{currentWeek=w;saveWeekState();renderGrid();renderWeek();};
     grid.appendChild(btn);
   }
   let wDone=0,dDone=0;
@@ -140,6 +142,7 @@ function toggleDay(week,dayKey,btn){
 }
 function setPhase(p){
   currentPhase=p; currentWeek=p===0?1:17;
+  saveWeekState();
   document.querySelectorAll('.phase-tab').forEach((t,i)=>t.classList.toggle('active',i===p));
   renderGrid(); renderWeek();
 }
@@ -190,6 +193,7 @@ function importProgress(){
 // ── INIT ───────────────────────────────────────────────────────
 function init(cfg){
   _cfg=cfg;
+  restoreWeekState();
   renderGrid();
   renderWeek();
 }

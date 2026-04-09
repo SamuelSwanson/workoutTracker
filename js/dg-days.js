@@ -15,7 +15,7 @@ function buildDays(w){
           {name:'Peloton — Zone 2 Steady Ride', sets:CT(30,bw,blk,p2,dl)},
           {name:'Speed Jump Rope — warm-up', sets:'3 min'},
         ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Lower Body Focus',color:'yoga',items:[
           {name:'Hip Flexor & Piriformis Flow — Yoga Mat', sets:'8 min'},
           {name:'Thoracic Rotation & Windmill Stretch', sets:'5 min'},
           {name:'Balance Board — Eyes Open Holds', sets:bw>=2?'6 min':'5 min'},
@@ -48,7 +48,7 @@ function buildDays(w){
           {name:'Punching Bag — Speed Combos + Footwork', sets:CT(25,bw,blk,p2,dl)},
           {name:'Heavy Jump Rope — 2min power intervals', sets:'3 rounds'},
         ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body Focus',color:'yoga',items:[
           {name:'Shoulder Capsule Stretch — Yoga Ball assist', sets:'5 min'},
           {name:'Wrist & Forearm Opener — Yoga Mat', sets:'4 min'},
           {name:'Lat + T-Spine Hang — Pull-up Bar', sets:'3×30s dead hang'},
@@ -92,12 +92,7 @@ function buildDays(w){
     thursday:{
       name:'THURSDAY', tag:'Explosive + Power', tagClass:'tag-explosive',
       segments:{
-        cardio:{label:'CARDIO / AGILITY',color:'cardio',items:[
-          {name:'Ladder Drills — Speed + Crossover Patterns', sets:CT(12,bw,blk,p2,dl)+' total'},
-          {name:'Mini Hurdle — Lateral Hop Overs', sets:'4×8'},
-          {name:'Cone Sprints — 5-10-5 Shuttle', sets:'6 rounds'},
-        ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+        yoga:{label:'PRE-CIRCUIT PELOTON YOGA/STRETCH — Full Body Warm-up',color:'yoga',items:[
           {name:'Dynamic Hip Circles + Leg Swings', sets:'5 min'},
           {name:'Glute & Psoas Release — Yoga Mat', sets:'5 min'},
           {name:'Ankle Mobility — Small Loop Band Assisted', sets:'3 min'},
@@ -107,18 +102,23 @@ function buildDays(w){
           {name:'X-Step with Handle Band Resistance', sets:P(3,8,'per side',bw,blk,p2,dl)},
           {name:'Trainer Disc — Max Distance Throws', sets:'10 full power throws'},
         ]},
-        lift:{label:'LIFT — Power & Plyometrics',color:'lift',items:[
-          {name:'Box Jumps — '+(isC?'Max Height Box':isB?'High Box':'Mid Box')+' (3 heights avail)', sets:P(4,3,'max intent',bw,blk,p2,dl)},
-          {name:'Zercher Deadlift — Barbell + Bumper Plates', sets:isC?P(4,2,'heavy PR',bw,blk,p2,dl):P(4,3,'',bw,blk,p2,dl)},
-          {name:'Hamstring Curl Machine — Heavy, 3s Eccentric', sets:P(3,8,'squeeze at top',bw,blk,p2,dl)},
-          {name:'Landmine Step-Through — Explosive Hip Drive', sets:P(4,5,'per side',bw,blk,p2,dl)},
-          {name:'Slam Ball Rotational Throw — Slam Ball', sets:P(3,8,'per side',bw,blk,p2,dl)},
-          {name:'Battle Rope — Alternating Waves', sets:`5×30s${bw>=2?' + 5s sprint finish':''}`},
-          {name:'Box — Depth Drop to Broad Jump', sets:P(3,3,'',bw,blk,p2,dl)},
-          {name:'Ab Roller', sets:P(3,10,'',bw,blk,p2,dl)},
+        lift:{label:'CIRCUIT — Power + Agility (11 Exercises)',color:'lift',items:[
+          {name:'Box Jumps — '+(isC?'Max Height Box':isB?'High Box':'Mid Box')+' (3 heights avail)', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Landmine Deadlift — Alternate Rows', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Hamstring Curl Machine — Heavy, 3s Eccentric', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Landmine Step-Through — Explosive Hip Drive', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Slam Ball Rotational Throw — Slam Ball', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Battle Rope — Alternating Waves', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Box — Depth Drop to Broad Jump', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Ladder Drills — Speed + Crossover Patterns', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Ab Roller', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Mini Hurdle — Lateral Hop Overs', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+          {name:'Cone Sprints — 5-10-5 Shuttle', sets:'5 rounds, 30s ea. / 10s rest / 30s round rest'},
+        ]},
+        mace:{label:'MACE WORK — Separate Session (Different Time/Room)',color:'dg',items:[
+          ...(isB?[{name:'Mace — Alternating 10-to-2', sets:P(3,10,'per side',bw,blk,p2,dl)}]:[]),
           ...(isD?[{name:'Mace Spear + 360 Combo — Mace Bell', sets:P(3,10,'per direction',bw,blk,p2,dl)}]:[]),
-          ...(isB?[{name:'Plyo Paralettes — Tuck Jump to L-Sit', sets:P(3,5,'',bw,blk,p2,dl)}]:[]),
-        ]}
+        ]},
       }
     },
     friday:{
@@ -128,7 +128,7 @@ function buildDays(w){
           {name:'Punching Bag — Power Combo Rounds', sets:CT(25,bw,blk,p2,dl)},
           {name:'Heavy Jump Rope — Steady State', sets:'5 min'},
         ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+        yoga:{label:'PRE-WORKOUT PELOTON YOGA/STRETCH — Upper Body / Pull Focus',color:'yoga',items:[
           {name:'Thoracic Opener over Yoga Ball', sets:'5 min'},
           {name:'Lats & Biceps Hang Stretch — Pull-up Bar', sets:'3×30s'},
           {name:'Forearm & Wrist Figure-8s', sets:'3 min'},
@@ -161,7 +161,7 @@ function buildDays(w){
           {name:'Heavy Jump Rope — Power sets', sets:'5 min'},
           ...(dl?[]:[{name:'Battle Rope — Tabata 20s on/10s off', sets:'4 rounds'}]),
         ]},
-        yoga:{label:'STRETCH',color:'yoga',items:[
+        yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
           {name:'Full Body Recovery Stretch — Yoga Mat', sets:'12 min'},
           {name:'Yoga Ball — Spinal Decompression', sets:'5 min'},
         ]},
@@ -192,7 +192,7 @@ function buildDays(w){
         cardio:{label:'CARDIO',color:'cardio',items:[
           {name:'Peloton — Easy Recovery Ride', sets:dl?'20 min easy':CT(25,bw,blk,p2,dl)},
         ]},
-        yoga:{label:'YOGA / STRETCH',color:'yoga',items:[
+        yoga:{label:'POST-WORKOUT PELOTON YOGA/STRETCH — Full Body Recovery',color:'yoga',items:[
           {name:'Full Body Yoga Flow — Yoga Mat', sets:'20 min'},
           {name:'Yoga Ball — Thoracic Extension Hold', sets:'3×45s'},
           {name:'Balance Board — Eyes Closed Holds', sets:bw>=2?'6 min':'5 min'},
