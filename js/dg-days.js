@@ -159,17 +159,15 @@ function buildDays(w){
     saturday:{
       name:'SATURDAY', tag:'Full Circuit + Field', tagClass:'tag-circuit',
       segments:{
-        cardio:{label:'CONDITIONING',color:'cardio',items:[
-          {name:'Speed Jump Rope — Double Unders', sets:'5 min'},
-          {name:'Heavy Jump Rope — Power sets', sets:'5 min'},
-          ...(dl?[]:[{name:'Battle Rope — Tabata 20s on/10s off', sets:'4 rounds'}]),
-        ]},
         dg:{label:'DISC GOLF — FIELD DAY',color:'dg',items:[
           {name:'Field Work — Various Discs', sets:isD?'Full game-speed session':'Free practice'},
           {name:'Trainer Disc Max Distance', sets:'10 full-send throws'},
           {name:'Basket — 50 Putts to finish', sets:'C1 & C2 mix'},
         ]},
         lift:{label:dl?'CIRCUIT — 2 Rounds (light)':'CIRCUIT — 3–4 Rounds',color:'lift',items:[
+          {name:'Speed Jump Rope — Double Unders', sets:dl?'×30 light':'×60'},
+          {name:'Heavy Jump Rope — Power sets', sets:dl?'×30 light':'×60'},
+          ...(dl?[]:[{name:'Battle Rope — Alternating Waves', sets:'20s max effort'}]),
           {name:'Kettlebell Swings', sets:dl?'×12 light':'×15'},
           {name:'Ring Push-ups — Olympic Rings', sets:dl?'×10':'×15'},
           {name:'Curl Bar — Bicep Curls', sets:'×12'},
