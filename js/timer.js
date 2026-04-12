@@ -122,7 +122,38 @@ window.tmHandleReset=function(){
   tmLockSettings(false);
   if($btnStart){$btnStart.textContent='START';$btnStart.disabled=false;}
   if($btnPause){$btnPause.textContent='PAUSE';$btnPause.disabled=true;}
+  if($btnSkip){$btnSkip.disabled=true;}
+  var $skipRnd=document.getElementById('tmBtnSkipRnd');
+  if($skipRnd){$skipRnd.disabled=true;}
   tmRenderIdle();
+};
+window.tmHandleSkipEx=function(){
+  if(_phase==='idle'||_phase==='done'||_phase==='countdown'||_phase==='rest-rnd')return;
+  tmStopTick();
+  // Skip to next exercise
+  if(_phase==='work'||_phase==='rest-ex'){
+    if(_exercise<_cfg.exercises){
+      _exercise++;
+      tmBeginWork();
+    } else {
+      // Finished all exercises, start round rest or next round
+      if(_round<_cfg.rounds){
+        if(_cfg.restRndMs>0) tmBeginRestRnd();
+        else{_round++;_exercise=1;tmBeginWork();}
+      } else { tmBeginDone(); }
+    }
+  }
+};
+window.tmHandleSkipRnd=function(){
+  if(_phase==='idle'||_phase==='done'||_phase==='countdown')return;
+  tmStopTick();
+  // Skip to next round
+  if(_round<_cfg.rounds){
+    _round++; _exercise=1;
+    tmBeginWork();
+  } else {
+    tmBeginDone();
+  }
 };
 window.tmClampInput=function(el,min,max){
   var v=parseInt(el.value);
@@ -147,6 +178,9 @@ function tmBeginCountdown(){
   sndCountdown();
   if($btnStart){$btnStart.disabled=true;}
   if($btnPause){$btnPause.disabled=false;}
+  if($btnSkip){$btnSkip.disabled=true;}
+  var $skipRnd=document.getElementById('tmBtnSkipRnd');
+  if($skipRnd){$skipRnd.disabled=true;}
   tmRenderCountdown();
   tmStopTick(); _tickId=setInterval(tmTickCountdown,1000);
 }
@@ -158,16 +192,21 @@ function tmTickCountdown(){
 function tmBeginWork(){
   _phase='work'; _totalMs=_cfg.workMs; _leftMs=_cfg.workMs;
   _lastTick=Date.now(); sndWork(); tmDoRender();
+  if($btnSkip){$btnSkip.disabled=false;}
   tmStopTick(); _tickId=setInterval(tmTickTimer,50);
 }
 function tmBeginRestEx(){
   _phase='rest-ex'; _totalMs=_cfg.restExMs; _leftMs=_cfg.restExMs;
   _lastTick=Date.now(); sndRestEx(); tmDoRender();
+  if($btnSkip){$btnSkip.disabled=false;}
   tmStopTick(); _tickId=setInterval(tmTickTimer,50);
 }
 function tmBeginRestRnd(){
   _phase='rest-rnd'; _totalMs=_cfg.restRndMs; _leftMs=_cfg.restRndMs;
   _lastTick=Date.now(); sndRestRnd(); tmDoRender();
+  if($btnSkip){$btnSkip.disabled=false;}
+  var $skipRnd=document.getElementById('tmBtnSkipRnd');
+  if($skipRnd){$skipRnd.disabled=false;}
   tmStopTick(); _tickId=setInterval(tmTickTimer,50);
 }
 function tmTickTimer(){
@@ -199,6 +238,9 @@ function tmBeginDone(){
   tmLockSettings(false);
   if($btnPause){$btnPause.disabled=true;}
   if($btnStart){$btnStart.disabled=true;}
+  if($btnSkip){$btnSkip.disabled=true;}
+  var $skipRnd=document.getElementById('tmBtnSkipRnd');
+  if($skipRnd){$skipRnd.disabled=true;}
   tmRenderDone();
 }
 
@@ -328,6 +370,8 @@ window.tmOpenSegTimer=function(key){
     '<div class="tm-controls">'+
       '<button class="tm-btn primary" id="tmBtnStart" onclick="tmHandleStart()">START</button>'+
       '<button class="tm-btn" id="tmBtnPause" onclick="tmHandlePause()" disabled>PAUSE</button>'+
+      '<button class="tm-btn" id="tmBtnSkip" onclick="tmHandleSkipEx()" disabled>SKIP EX</button>'+
+      '<button class="tm-btn" id="tmBtnSkipRnd" onclick="tmHandleSkipRnd()" disabled>SKIP RND</button>'+
       '<button class="tm-btn" onclick="tmHandleReset()">RESET</button>'+
     '</div>'+
     '<div class="tm-settings">'+
