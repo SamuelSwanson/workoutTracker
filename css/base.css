@@ -144,6 +144,27 @@ header{display:flex;align-items:center;justify-content:space-between;padding:14p
 .io-btn:hover{border-color:var(--accent);color:var(--accent)}
 .io-btn.imp:hover{border-color:var(--accent2);color:var(--accent2)}
 
+/* ── VARIANT BOXES ── */
+.variants-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.variant-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;padding:14px}
+.variant-box.abs-box{border-color:rgba(247,130,58,.5)}
+.variant-box.agility-box{border-color:rgba(58,247,158,.5)}
+.variant-title{font-family:'Bebas Neue',cursive;font-size:1rem;letter-spacing:.08em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.variant-title::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:var(--lift)}
+.variant-box.agility-box .variant-title::before{background:var(--accent2)}
+.variant-content{display:flex;flex-direction:column;gap:10px}
+.variant-item{padding:10px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--lift)}
+.variant-box.agility-box .variant-item{border-left-color:var(--accent2)}
+.variant-num{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:2px}
+.variant-label{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.03em;color:var(--text);margin-bottom:6px;font-weight:600}
+.variant-exercises{list-style:none;font-size:.7rem;opacity:.85}
+.variant-exercises li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.variant-exercises li:last-child{border-bottom:none}
+.var-ex-name{flex:1;color:var(--text)}
+.var-ex-sets{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);flex-shrink:0;margin-left:8px}
+
+@media(max-width:900px){.variants-grid{grid-template-columns:1fr}}
+
 /* ── INFO MODAL ── */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}

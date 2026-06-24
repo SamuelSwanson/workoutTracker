@@ -68,6 +68,7 @@ function renderWeek(){
     <div class="weekly-progress-bar" aria-label="Weekly progress bar"><div class="weekly-progress-fill" style="width:${progressPercent}%;background:${progressColor}"></div></div>
     <div class="prog-banner ${bl.isDeload?'deload-banner':''}"><strong>${pn.title}</strong>${pn.body}</div>
     <div class="days-grid" id="daysGrid"></div>
+    <div class="variants-grid" id="variantsGrid"></div>
     <div class="notes-area">
       <div class="notes-label">Week Notes / PRs / Weights / How You Felt</div>
       <textarea class="notes-input" id="weekNotes" placeholder="e.g. Squats: 185×5. Session felt strong. HR avg 142 on bike..."></textarea>
@@ -120,7 +121,37 @@ function renderWeek(){
     dn.value=wData[`day_notes_${dayKey}`]||'';
     dn.addEventListener('input',function(){const s=getState();if(!s[`week_${w}`])s[`week_${w}`]={};s[`week_${w}`][`day_notes_${dayKey}`]=this.value;saveState(s);});
   });
+
+  // ─── RENDER VARIANT BOXES ───────────────────────────────────
+  const vg=document.getElementById('variantsGrid');
+  const absVariants=getAllAbsVariants(w);
+  const agilityVariants=getAllAgilityVariants(w);
+
+  // ABS VARIANTS BOX
+  let absHtml='<div class="variant-box abs-box"><div class="variant-title">ABS WORKOUTS</div><div class="variant-content">';
+  absVariants.forEach(v=>{
+    absHtml+=`<div class="variant-item"><div class="variant-num">Day ${v.num}</div><div class="variant-label">${v.label}</div><ul class="variant-exercises">`;
+    v.items.forEach(ex=>{
+      absHtml+=`<li><span class="var-ex-name">${ex.name}</span><span class="var-ex-sets">${ex.sets}</span></li>`;
+    });
+    absHtml+='</ul></div>';
+  });
+  absHtml+='</div></div>';
+
+  // AGILITY VARIANTS BOX
+  let agHtml='<div class="variant-box agility-box"><div class="variant-title">AGILITY WORKOUTS</div><div class="variant-content">';
+  agilityVariants.forEach(v=>{
+    agHtml+=`<div class="variant-item"><div class="variant-num">Day ${v.num}</div><div class="variant-label">${v.label}</div><ul class="variant-exercises">`;
+    v.items.forEach(ex=>{
+      agHtml+=`<li><span class="var-ex-name">${ex.name}</span><span class="var-ex-sets">${ex.sets}</span></li>`;
+    });
+    agHtml+='</ul></div>';
+  });
+  agHtml+='</div></div>';
+
+  vg.innerHTML=absHtml+agHtml;
 }
+
 
 // ── TOGGLE HANDLERS ────────────────────────────────────────────
 function toggleEx(week,dayKey,segKey,idx,el){
