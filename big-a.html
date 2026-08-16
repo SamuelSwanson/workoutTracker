@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BIG A — 8-Week Full Body Strength Program</title>
+<link rel="stylesheet" href="css/base.css"/>
+<style>
+  /* Big A theme — purple */
+  :root {
+    --accent:#9030f7;
+    --accent2:#b870f7;
+    --accent3:#f730a8;
+    --accent4:#30f7f7;
+    --dg:#9030f7;
+    --accent-lo:rgba(144,48,247,.08);
+    --accent-bd:rgba(144,48,247,.28);
+  }
+  .stat-pill .dot { background: var(--accent); }
+  .stat-pill .dot.r { background: var(--accent3); }
+  .block-badge { color: #fff; }
+  .block-badge.deload { color: #000; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-left">
+    <a class="back-link" href="index.html">← HOME</a>
+    <div class="logo">BIG A<span>8-WEEK STRENGTH PROGRAM</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-pill"><span class="dot"></span><span id="weeksDone">0</span>&nbsp;/ 8 WEEKS</div>
+    <div class="stat-pill"><span class="dot r"></span><span id="daysDone">0</span>&nbsp;DAYS LOGGED</div>
+  </div>
+</header>
+<div class="phase-nav">
+  <div class="phase-tab active" onclick="setPhase(0)">WEEKS 1–4 — BUILDING</div>
+  <div class="phase-tab" onclick="setPhase(1)">WEEKS 5–8 — STRENGTH</div>
+</div>
+<div class="week-grid-wrap">
+  <div class="section-label">SELECT WEEK — dashed border = deload week</div>
+  <div class="week-grid" id="weekGrid"></div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--cardio)"></div>CARDIO</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yoga)"></div>MOBILITY</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--dg)"></div>STRENGTH</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--lift)"></div>LIFTING</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--yellow)"></div>DELOAD</div>
+</div>
+<div class="content-area" id="contentArea"></div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="infoModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-ex-name" id="modalName"></div>
+    <div class="modal-ex-sets" id="modalSets"></div>
+    <a class="modal-yt-link" id="modalYT" target="_blank" rel="noopener">▶ SEARCH YOUTUBE — HOW TO DO THIS</a>
+  </div>
+</div>
+<script src="js/engine.js"></script>
+<script src="js/big-a-days.js"></script>
+<script src="js/app.js"></script>
+<script src="js/timer.js"></script>
+<script>
+  init({
+    storageKey: 'bigA_v1',
+    exportFilename: 'big_a_progress.json',
+    totalWeeks: 8,
+  });
+</script>
+</body>
+</html>

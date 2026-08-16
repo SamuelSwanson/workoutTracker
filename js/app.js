@@ -9,10 +9,19 @@ let _cfg = {};
 
 // ── BLOCK LABELS ───────────────────────────────────────────────
 function getBlockLabel(w){
-  const b=getBlock(w),p2=isPhase2(w),dl=DELOAD_WEEKS.has(w);
-  const map={A:{label:'BLOCK A',sub:'Control & Foundation'},B:{label:'BLOCK B',sub:'Speed & Power'},C:{label:'BLOCK C',sub:'Strength Heavy'},D:{label:'BLOCK D',sub:'Integration & Peak'}};
+  const totalWeeks=_cfg.totalWeeks||32;
+  const isDL=totalWeeks===8?(DELOAD_WEEKS_8?.has(w)):DELOAD_WEEKS.has(w);
+  let b,p2;
+  if(totalWeeks===8){
+    b=getBlock8(w);
+    p2=isPhase2_8(w);
+  }else{
+    b=getBlock(w);
+    p2=isPhase2(w);
+  }
+  const map={A:{label:'BLOCK A',sub:'Control & Foundation'},B:{label:'BLOCK B',sub:'Strength & Power'},C:{label:'BLOCK C',sub:'Strength Heavy'},D:{label:'BLOCK D',sub:'Integration & Peak'}};
   const clsMap={A:'',B:'b',C:'c',D:'d'};
-  return{label:(p2?'P2 ':'')+(dl?'DELOAD':map[b].label),sub:dl?'Recovery — 60% volume, no PR attempts':map[b].sub+(p2?' — Phase 2 Elevated':''),cls:dl?'deload':clsMap[b],isDeload:dl};
+  return{label:(p2?'P2 ':'')+(isDL?'DELOAD':map[b].label),sub:isDL?'Recovery — 60% volume, no PR attempts':map[b].sub+(p2?' — Phase 2 Elevated':''),cls:isDL?'deload':clsMap[b],isDeload:isDL};
 }
 
 // ── STATE ──────────────────────────────────────────────────────
@@ -28,20 +37,23 @@ function restoreWeekState(){ try{const w=JSON.parse(localStorage.getItem(_cfg.st
 function renderGrid(){
   const state=getState(), grid=document.getElementById('weekGrid');
   grid.innerHTML='';
-  const start=currentPhase===0?1:17, end=currentPhase===0?16:32;
+  const totalWeeks=_cfg.totalWeeks||32;
+  const weeksPerPhase=totalWeeks/2;
+  const start=currentPhase===0?1:weeksPerPhase+1, end=currentPhase===0?weeksPerPhase:totalWeeks;
   for(let w=start;w<=end;w++){
     const wData=state[`week_${w}`]||{};
     const daysComplete=Object.keys(wData).filter(k=>k.startsWith('day_done_')).length;
-    const completed=wData.week_done===true, deload=DELOAD_WEEKS.has(w);
+    const completed=wData.week_done===true, deload=DELOAD_WEEKS.has(w)||(totalWeeks===8?DELOAD_WEEKS_8?.has(w):false);
     const btn=document.createElement('div');
     btn.className='week-btn'+(currentWeek===w?' active':'')+(completed?' completed':'')+(deload?' deload':'');
-    btn.innerHTML=`<div class="wnum">W${w}</div><div class="wlabel">${deload?'DELOAD':getBlock(w)+blockWeek(w)}</div><div class="prog-bar" style="width:${Math.round((daysComplete/6)*100)}%"></div><div class="check">✓</div>`;
+    const blockLabel=totalWeeks===8?(deload?'DL':`${getBlock8(w)}${blockWeek8(w)}`):(deload?'DL':`${getBlock(w)}${blockWeek(w)}`);
+    btn.innerHTML=`<div class="wnum">W${w}</div><div class="wlabel">${blockLabel}</div><div class="prog-bar" style="width:${Math.round((daysComplete/6)*100)}%"></div><div class="check">✓</div>`;
     btn.onclick=()=>{currentWeek=w;saveWeekState();renderGrid();renderWeek();};
     grid.appendChild(btn);
   }
   let wDone=0,dDone=0;
   const s=getState();
-  for(let i=1;i<=32;i++){const wd=s[`week_${i}`]||{};if(wd.week_done)wDone++;Object.keys(wd).filter(k=>k.startsWith('day_done_')).forEach(()=>dDone++);}
+  for(let i=1;i<=totalWeeks;i++){const wd=s[`week_${i}`]||{};if(wd.week_done)wDone++;Object.keys(wd).filter(k=>k.startsWith('day_done_')).forEach(()=>dDone++);}
   document.getElementById('weeksDone').textContent=wDone;
   document.getElementById('daysDone').textContent=dDone;
 }
